@@ -1,0 +1,22 @@
+{
+  "name": "intellitext",
+  "version": "1.0.0",
+  "description": "An intelligent text editor with html and markdown support to cure the writer's block",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sr-vZ/intelliText.git"
+  },
+  "author": "SrvZ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sr-vZ/intelliText/issues"
+  },
+  "homepage": "https://github.com/Sr-vZ/intelliText#readme",
+  "dependencies": {
+    "froala-editor": "^2.6.4"
+  }
+}
