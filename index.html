@@ -3,11 +3,37 @@
   <head>
     <meta charset="UTF-8">
     <title>intelliText</title>
+      <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./node_modules/froala-editor/css/froala editor.min.css" rel="stylesheet" type="text/css">
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+    <!-- Include all Editor plugins CSS style. -->
+    <link rel="stylesheet" href="./node_modules/froala-editor/css/froala_editor.pkgd.min.css">
+    <!-- Insert this line after script imports-->
+    <script>if (window.module) module = window.module;</script>
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <!--<h1>Hello World!</h1>
     We are using node <script>document.write(process.versions.node)</script>,
     Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    and Electron <script>document.write(process.versions.electron)</script>.-->
+
+    <div id="froala-editor"></div>
+    <div id="research">
+        
+    </div>
   </body>
+    <script>
+        $(function() {
+        $('div#froala-editor').froalaEditor({
+        toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
+        pluginsEnabled: null,
+        toolbarInline: true,
+        })
+    });
+
+</script>
+
 </html>
