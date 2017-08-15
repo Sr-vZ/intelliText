@@ -15,6 +15,7 @@
      <link href="./node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css">  
      <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="./node_modules/froala-editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+      
   </head>
   <body>
     <!--<h1>Hello World!</h1>
@@ -22,12 +23,15 @@
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.-->
 
-    <div id="froala-editor"></div>
+    <div id="froala-editor" aria-autocomplete="on" spellcheck="true" aria-autocorrect="on">
+        <!-- <textarea id="editor"></textarea> -->
+    </div>
     <div id="research">
         
     </div>
   </body>
     <script>
+     
         $(function() {
         $('div#froala-editor').froalaEditor({
         toolbarButtons: ['fullscreen','bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
@@ -35,7 +39,7 @@
         //toolbarInline: true,
         })
     });
-
+    
 </script>
 
 </html>
