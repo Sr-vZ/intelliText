@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Sr-vZ/intelliText#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "froala-editor": "^2.6.4"
   }
 }
