@@ -34,7 +34,7 @@
     </div>
   </body>
     <script>
-     
+        var _ = require('lodash')
         $(function() {
         $('div#froala-editor').froalaEditor({
         toolbarButtons: ['fullscreen','bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
@@ -46,7 +46,10 @@
           var html = $('div#froala-editor').froalaEditor('html.get');
           var text = extractContent(html)
           //console.log(text)
-          getSuggestions(text)
+          var n = text.split(" ");
+          word = n[n.length - 1];
+
+          getSuggestions(word)
         })
         
         /* $("#froala-editor" ).autocomplete({
@@ -56,12 +59,12 @@
 
     });
     function getSuggestions(text){
-      $.getJSON('https://api.datamuse.com/sug?s='+text+'&max=4',function(json){
+      $.getJSON('https://api.datamuse.com/word?ml='+text+'&max=5',function(json){
         suggestions = []
         for(i=0;i<json.length;i++){
           suggestions.push(json[1].word)
         }
-        console.log(suggestions);
+        console.log(_.uniq(suggestions))
       })
     }
     function extractContent(s) {

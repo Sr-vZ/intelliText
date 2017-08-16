@@ -1,0 +1,2 @@
+The suggestion engine is powered by https://www.datamuse.com/api/
+The editor is using froala editor for html editing
