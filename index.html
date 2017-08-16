@@ -8,14 +8,17 @@
     
     <script src="./node_modules/jquery/dist/jquery.js"></script>
     <script src="./node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
-    
+     <!-- <script src="http://code.jquery.com/jquery-1.12.4.js"></script> 
+     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  -->
+
+
     <!-- Insert this line after script imports-->
      <script>if (window.module) module = window.module;</script>
      <!-- Include all Editor plugins CSS style. -->
      <link href="./node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css">  
      <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="./node_modules/froala-editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
-      
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">   -->
   </head>
   <body>
     <!--<h1>Hello World!</h1>
@@ -24,7 +27,7 @@
     and Electron <script>document.write(process.versions.electron)</script>.-->
 
     <div id="froala-editor" aria-autocomplete="on" spellcheck="true" aria-autocorrect="on">
-        <!-- <textarea id="editor"></textarea> -->
+        
     </div>
     <div id="research">
         
@@ -38,8 +41,35 @@
         pluginsEnabled: null,
         //toolbarInline: true,
         })
+        var input = $("#froala-editor");
+        input.on('keydown',function(){
+          var html = $('div#froala-editor').froalaEditor('html.get');
+          var text = extractContent(html)
+          //console.log(text)
+          getSuggestions(text)
+        })
+        
+        /* $("#froala-editor" ).autocomplete({
+          source: [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ]
+        }); */
+
+
     });
-    
+    function getSuggestions(text){
+      $.getJSON('https://api.datamuse.com/sug?s='+text+'&max=4',function(json){
+        suggestions = []
+        for(i=0;i<json.length;i++){
+          suggestions.push(json[1].word)
+        }
+        console.log(suggestions);
+      })
+    }
+    function extractContent(s) {
+      var span= document.createElement('span');
+      span.innerHTML= s;
+      return span.textContent || span.innerText;
+    };
+
 </script>
 
 </html>
