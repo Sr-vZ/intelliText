@@ -38,6 +38,7 @@ function getSuggestions(text) {
     var dataList = $('#suggestions')
 
     $.getJSON('https://api.datamuse.com/sug?s=' + text + '*&max=5', function (json) {
+        json = _.sortBy(json,'')
         suggestions = []
         suggestionBox = '<ul id="suggestionList">'
         for (i = 0; i < json.length; i++) {
@@ -52,7 +53,7 @@ function getSuggestions(text) {
             $('#suggestions').html(suggestionBox)
             $('#suggestions').show()
         } else {
-            $('#suggestions').hide()
+            //$('#suggestions').hide()
         }
 
         /* var input = document.getElementById("froala-editor");

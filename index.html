@@ -34,6 +34,7 @@
   <link href="./node_modules/quill/dist/quill.snow.css" rel="stylesheet">
   <script src="./node_modules/quill/dist/quill.js"></script>
   <script src="./editor.js"></script>
+  <link href="./editorUI.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -42,10 +43,13 @@
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.-->
 
-  <div id="froala-editor" list="suggestion" aria-autocomplete="on" spellcheck="true" aria-autocorrect="on">
-
+  <div id="froala-editor" list="suggestion" spellcheck="true">
   </div>
-  <div id='suggestions' class="list-group"></div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center">
+      <div id="suggestions" class="list-group list-group-horizontal"></div>
+    </div>
+  </div>
   <div id="research">
 
   </div>
