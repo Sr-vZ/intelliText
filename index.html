@@ -1,78 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>intelliText</title>
-      <!-- Insert this line above script imports  -->
-     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script> 
-    
-    <script src="./node_modules/jquery/dist/jquery.js"></script>
-    <script src="./node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
-     <!-- <script src="http://code.jquery.com/jquery-1.12.4.js"></script> 
+
+<head>
+  <meta charset="UTF-8">
+  <title>intelliText</title>
+  <!-- Insert this line above script imports  -->
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
+  <link rel="stylesheet" href="./node_modules/awesomplete/awesomplete.css" />
+  <script src="./node_modules/awesomplete/awesomplete.js" async></script>
+
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+  <script src="./node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+
+  <!-- <script src="http://code.jquery.com/jquery-1.12.4.js"></script> 
      <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  -->
 
 
-    <!-- Insert this line after script imports-->
-     <script>if (window.module) module = window.module;</script>
-     <!-- Include all Editor plugins CSS style. -->
-     <link href="./node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css">  
-     <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="./node_modules/froala-editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">   -->
-  </head>
-  <body>
-    <!--<h1>Hello World!</h1>
+  <!-- Insert this line after script imports-->
+  <script>
+    if (window.module) module = window.module;
+  </script>
+  <!-- Include all Editor plugins CSS style. -->
+  <link href="./node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css">
+  <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="./node_modules/froala-editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">   -->
+  <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="./node_modules/quill/dist/quill.snow.css" rel="stylesheet">
+  <script src="./node_modules/quill/dist/quill.js"></script>
+  <script src="./editor.js"></script>
+</head>
+
+<body>
+  <!--<h1>Hello World!</h1>
     We are using node <script>document.write(process.versions.node)</script>,
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.-->
 
-    <div id="froala-editor" aria-autocomplete="on" spellcheck="true" aria-autocorrect="on">
-        
-    </div>
-    <div id="research">
-        
-    </div>
-  </body>
-    <script>
-        var _ = require('lodash')
-        $(function() {
-        $('div#froala-editor').froalaEditor({
-        toolbarButtons: ['fullscreen','bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
-        pluginsEnabled: null,
-        //toolbarInline: true,
-        })
-        var input = $("#froala-editor");
-        input.on('keydown',function(){
-          var html = $('div#froala-editor').froalaEditor('html.get');
-          var text = extractContent(html)
-          //console.log(text)
-          var n = text.split(" ");
-          word = n[n.length - 1];
+  <div id="froala-editor" list="suggestion" aria-autocomplete="on" spellcheck="true" aria-autocorrect="on">
 
-          getSuggestions(word)
-        })
-        
-        /* $("#froala-editor" ).autocomplete({
-          source: [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ]
-        }); */
+  </div>
+  <div id='suggestions' class="list-group"></div>
+  <div id="research">
 
-
-    });
-    function getSuggestions(text){
-      $.getJSON('https://api.datamuse.com/word?ml='+text+'&max=5',function(json){
-        suggestions = []
-        for(i=0;i<json.length;i++){
-          suggestions.push(json[1].word)
-        }
-        console.log(_.uniq(suggestions))
-      })
-    }
-    function extractContent(s) {
-      var span= document.createElement('span');
-      span.innerHTML= s;
-      return span.textContent || span.innerText;
-    };
-
-</script>
+  </div>
+  <div id="quill-editor"></div>
+</body>
 
 </html>
