@@ -4,7 +4,7 @@ var _ = require('lodash')
 $(function () {
 
     $('#suggestions').hide()
-    suggestionClick()
+    
     $('div#froala-editor').froalaEditor({
         toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
         pluginsEnabled: null,
@@ -21,6 +21,7 @@ $(function () {
 
             getSuggestions(word)
             //awesompleteInject(word)
+            suggestionClick()
 
         }
 
@@ -74,11 +75,17 @@ function suggestionClick() {
             var text = $(event.target).text();
             //console.log(event.target.parentElement.id)
             var html = $('div#froala-editor').froalaEditor('html.get');
-            var text = extractContent(html)
-            var n = text.split(" ");
+            var content = extractContent(html)
+            var n = content.split(" ");
             word = n[n.length - 1];
-
-            $('#froala-editor').froalaEditor('html.insert', text, true);
+            //html.replace(/word/,'')
+            /* $('#froala-editor').froalaEditor('html.cleanEmptyTags');
+            $('#froala-editor').froalaEditor('html.set','', true);
+            $('#froala-editor').froalaEditor('html.set', html, true); */
+            for(i=0;i<word.length;i++){
+                $('#froala-editor').froalaEditor('cursor.backspace');
+            }
+            $('#froala-editor').froalaEditor('html.insert', text+' ', true);
             $('#suggestion').hide()
         }
     });
