@@ -4,7 +4,7 @@ var _ = require('lodash')
 $(function () {
 
     $('#suggestions').hide()
-    
+
     $('div#froala-editor').froalaEditor({
         toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
         pluginsEnabled: null,
@@ -38,7 +38,7 @@ function getSuggestions(text) {
     var dataList = $('#suggestions')
 
     $.getJSON('https://api.datamuse.com/sug?s=' + text + '*&max=5', function (json) {
-        json = _.sortBy(json,['word'])
+        json = _.sortBy(json, ['word'])
         //console.log(json)
         suggestions = []
         suggestionBox = '<ul id="suggestionList">'
@@ -84,10 +84,10 @@ function suggestionClick() {
             /* $('#froala-editor').froalaEditor('html.cleanEmptyTags');
             $('#froala-editor').froalaEditor('html.set','', true);
             $('#froala-editor').froalaEditor('html.set', html, true); */
-            for(i=0;i<word.length;i++){
+            for (i = 0; i < word.length; i++) {
                 $('#froala-editor').froalaEditor('cursor.backspace');
             }
-            $('#froala-editor').froalaEditor('html.insert', text+' ', true);
+            $('#froala-editor').froalaEditor('html.insert', text + ' ', true);
             $('#suggestion').hide()
         }
     });
