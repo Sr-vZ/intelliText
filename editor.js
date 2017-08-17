@@ -38,7 +38,8 @@ function getSuggestions(text) {
     var dataList = $('#suggestions')
 
     $.getJSON('https://api.datamuse.com/sug?s=' + text + '*&max=5', function (json) {
-        json = _.sortBy(json,'')
+        json = _.sortBy(json,['word'])
+        //console.log(json)
         suggestions = []
         suggestionBox = '<ul id="suggestionList">'
         for (i = 0; i < json.length; i++) {
@@ -48,7 +49,7 @@ function getSuggestions(text) {
             dataList.append(option);
         }
         suggestionBox += '</ul>'
-        console.log((suggestions))
+        //console.log((suggestions))
         if (suggestions.length > 0) {
             $('#suggestions').html(suggestionBox)
             $('#suggestions').show()
