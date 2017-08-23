@@ -21,9 +21,15 @@ $(function () {
             var n = text.split(" ");
             word = n[n.length - 1];
 
-            getSuggestions(word)
+
             //awesompleteInject(word)
             //suggestionClick()
+            //console.log(window.getSelection().baseOffset)
+            //html += '<div id="suggestions" class="list-group list-group-horizontal"></div>';
+            //$('#froala-editor').froalaEditor('html.set', html, false)
+            //$('#froala-editor').froalaEditor('html.insert', '', false)
+            placeDiv(window.getSelection().baseOffset,0)
+            getSuggestions(word)
 
         }
 
@@ -97,19 +103,53 @@ function suggestionClick() {
     });
 }
 
-function wordhintOnClick(target){
+function wordhintOnClick(target) {
     text = $(target).text()
     var html = $('div#froala-editor').froalaEditor('html.get');
-            var content = extractContent(html)
-            var n = content.split(" ");
-            word = n[n.length - 1];
-            
-            for (i = 0; i < word.length; i++) {
-                $('#froala-editor').froalaEditor('cursor.backspace');
-            }
-            //if(word!==text)
-            $('#froala-editor').froalaEditor('html.insert', text + ' ', true);
+    var content = extractContent(html)
+    var n = content.split(" ");
+    word = n[n.length - 1];
+
+    for (i = 0; i < word.length; i++) {
+        $('#froala-editor').froalaEditor('cursor.backspace');
+    }
+    //if(word!==text)
+    $('#froala-editor').froalaEditor('html.insert', text + ' ', true);
 }
 /* var quill = new Quill('#quill-editor', {
     theme: 'snow'
 }); */
+function doGetCaretPosition(oField) {
+
+    // Initialize
+    var iCaretPos = 0;
+
+    // IE Support
+    if (document.selection) {
+
+        // Set focus on the element
+        oField.focus();
+
+        // To get cursor position, get empty selection range
+        var oSel = document.selection.createRange();
+
+        // Move selection start to 0 position
+        oSel.moveStart('character', -oField.value.length);
+
+        // The caret position is selection length
+        iCaretPos = oSel.text.length;
+    }
+
+    // Firefox support
+    else if (oField.selectionStart || oField.selectionStart == '0')
+        iCaretPos = oField.selectionStart;
+
+    // Return results
+    return iCaretPos;
+}
+function placeDiv(x_pos, y_pos) {
+  var d = document.getElementById('suggestions');
+  d.style.position = "absolute";
+  d.style.left = x_pos+'px';
+  d.style.top = y_pos+'px';
+}
