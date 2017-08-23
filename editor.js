@@ -23,7 +23,7 @@ $(function () {
 
             getSuggestions(word)
             //awesompleteInject(word)
-            suggestionClick()
+            //suggestionClick()
 
         }
 
@@ -46,7 +46,7 @@ function getSuggestions(text) {
         suggestionBox = '<ul id="suggestionList">'
         for (i = 0; i < json.length; i++) {
             suggestions.push(json[i].word)
-            suggestionBox += '<button class="list-group-item list-group-item-action">' + json[i].word + '</button>'
+            suggestionBox += '<button class="list-group-item list-group-item-action" onclick="wordhintOnClick(this)">' + json[i].word + '</button>'
             var option = document.createElement('option');
             dataList.append(option);
         }
@@ -74,7 +74,7 @@ function extractContent(s) {
 };
 
 function suggestionClick() {
-    $(document).click(function (event) {
+    $('#suggestionList').click(function (event) {
         if (event.target.parentElement.id = 'suggestionList') {
             var text = $(event.target).text();
             //console.log(event.target.parentElement.id)
@@ -95,6 +95,20 @@ function suggestionClick() {
             $('#suggestion').hide()
         }
     });
+}
+
+function wordhintOnClick(target){
+    text = $(target).text()
+    var html = $('div#froala-editor').froalaEditor('html.get');
+            var content = extractContent(html)
+            var n = content.split(" ");
+            word = n[n.length - 1];
+            
+            for (i = 0; i < word.length; i++) {
+                $('#froala-editor').froalaEditor('cursor.backspace');
+            }
+            //if(word!==text)
+            $('#froala-editor').froalaEditor('html.insert', text + ' ', true);
 }
 /* var quill = new Quill('#quill-editor', {
     theme: 'snow'
