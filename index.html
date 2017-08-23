@@ -42,10 +42,12 @@
     We are using node <script>document.write(process.versions.node)</script>,
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.-->
+    <div class="container">
     <div id="heading">
+      <label id='heading-label'>Subject</label>
       <input id="heading-text" type="text" class="input">
     </div>
-  <div id="froala-editor" list="suggestion" spellcheck="true">
+  <div id="froala-editor" spellcheck="true">
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center">
@@ -53,12 +55,13 @@
     </div>
   </div>
   <div id="research">
-    <webview id="foo" src="https://www.medium.com/" style="height:480px;">
+    <webview id="foo" src="https://www.medium.com/search?q=" style="height:480px;">
       <div class="indicator"></div>
     </webview>
 
   </div>
   <div id="quill-editor"></div>
+  </div>
 </body>
 
 </html>
