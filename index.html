@@ -42,25 +42,28 @@
     We are using node <script>document.write(process.versions.node)</script>,
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.-->
-    <div class="container">
-    <div id="heading">
-      <label id='heading-label'>Subject</label>
-      <input id="heading-text" type="text" class="input">
+  <div class="container">
+    
+    <div id="heading" class="form-group">
+      <label for="heading-text" >Keyword or Topic</label>
+      <input id="heading-text" type="text" class="form-control">
     </div>
-  <div id="froala-editor" spellcheck="true">
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center">
-      <div id="suggestions" class="list-group list-group-horizontal"></div>
+    <div id="editor-container" class="form-group">
+    <div id="froala-editor" spellcheck="true">
     </div>
-  </div>
-  <div id="research">
-    <webview id="foo" src="https://www.medium.com/search?q=" style="height:480px;">
-      <div class="indicator"></div>
-    </webview>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center">
+        <div id="suggestions" class="list-group list-group-horizontal"></div>
+      </div>
+    </div>
+    </div>
+    <div id="research">
+      <webview id="foo" src="https://www.medium.com/search?q=" style="height:480px;">
+        <div class="indicator"></div>
+      </webview>
 
-  </div>
-  <div id="quill-editor"></div>
+    </div>
+    <div id="quill-editor"></div>
   </div>
 </body>
 
