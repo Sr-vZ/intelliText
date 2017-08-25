@@ -28,7 +28,7 @@ $(function () {
             //html += '<div id="suggestions" class="list-group list-group-horizontal"></div>';
             //$('#froala-editor').froalaEditor('html.set', html, false)
             //$('#froala-editor').froalaEditor('html.insert', '', false)
-            placeDiv(window.getSelection().baseOffset,0)
+            placeDiv(window.getSelection().baseOffset, -250)
             getSuggestions(word)
 
         }
@@ -115,6 +115,7 @@ function wordhintOnClick(target) {
     }
     //if(word!==text)
     $('#froala-editor').froalaEditor('html.insert', text + ' ', true);
+    $('suggestions').hide()
 }
 /* var quill = new Quill('#quill-editor', {
     theme: 'snow'
@@ -147,9 +148,11 @@ function doGetCaretPosition(oField) {
     // Return results
     return iCaretPos;
 }
+
 function placeDiv(x_pos, y_pos) {
-  var d = document.getElementById('suggestions');
-  d.style.position = "absolute";
-  d.style.left = x_pos+'px';
-  d.style.top = y_pos+'px';
+    var d = document.getElementById('suggestions');
+    d.style.position = "absolute";
+    d.style.left = x_pos + 'px';
+    d.style.top = y_pos + 'px';
+    d.style.zIndex = 5;
 }
