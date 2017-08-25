@@ -30,7 +30,7 @@ $(function () {
             //$('#froala-editor').froalaEditor('html.insert', '', false)
             placeDiv(window.getSelection().baseOffset, -250)
             getSuggestions(word)
-
+            
         }
 
     })
