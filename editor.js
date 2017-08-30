@@ -1,17 +1,34 @@
 var _ = require('lodash')
 
-
 $(function () {
+/*     // Define data source for At.JS.
+    var datasource = ["Jacob", "Isabella", "Ethan", "Emma", "Michael", "Olivia"];
 
+    // Build data to be used in At.JS config.
+    var names = $.map(datasource, function (value, i) {
+        return {
+            'id': i,
+            'name': value,
+            'email': value + "@email.com"
+        };
+    });
+
+    // Define config for At.JS.
+    var config = {
+        at: "@",
+        data: names,
+        displayTpl: '<li>${name} <small>${email}</small></li>',
+        limit: 200
+    } */
     $('#suggestions').hide()
 
     $('div#froala-editor').froalaEditor({
-        toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
-        pluginsEnabled: null,
-        spellcheck: true,
-        height: 300
-        //toolbarInline: true,
-    })
+            toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
+            pluginsEnabled: null,
+            spellcheck: true,
+            height: 300
+            //toolbarInline: true,
+        })
     var input = $("#froala-editor");
     input.on('keyup', function (e) {
         if (e.which <= 90 && e.which >= 48) {
@@ -30,7 +47,7 @@ $(function () {
             //$('#froala-editor').froalaEditor('html.insert', '', false)
             placeDiv(window.getSelection().baseOffset, -250)
             getSuggestions(word)
-            
+            console.log($('#froala-editor').caret('position'))
         }
 
     })
