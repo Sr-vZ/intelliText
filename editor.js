@@ -1,56 +1,93 @@
 var _ = require('lodash')
 
 $(function () {
-/*     // Define data source for At.JS.
-    var datasource = ["Jacob", "Isabella", "Ethan", "Emma", "Michael", "Olivia"];
+    suggestions = [];
+
+    // Define data source for At.JS.
+    datasource = suggestions; // suggestions; //["Jacob", "Isabella", "Ethan", "Emma", "Michael", "Olivia"];
 
     // Build data to be used in At.JS config.
-    var names = $.map(datasource, function (value, i) {
+    words = $.map(datasource, function (value, i) {
         return {
             'id': i,
-            'name': value,
-            'email': value + "@email.com"
+            'word': value,
         };
     });
 
     // Define config for At.JS.
-    var config = {
-        at: "@",
-        data: names,
-        displayTpl: '<li>${name} <small>${email}</small></li>',
+    config = {
+        at: '',
+        editableAtwhoQueryAttrs: {"data-fr-verified": true},
+        data: words,
+        displayTpl: '<li>${word}</li>',
         limit: 200
-    } */
+    }
+
     $('#suggestions').hide()
 
-    $('div#froala-editor').froalaEditor({
+    $('div#froala-editor')
+        .on('froalaEditor.input', function (e, editor) {
+
+            autocompletionTest()
+            editor.$el.atwho(config);
+            console.log(editor.$el.atwho(config))
+            editor.events.on('keydown', function (e) {
+                if (e.which == $.FroalaEditor.KEYCODE.ENTER && editor.$el.atwho('isSelecting')) {
+                    return false;
+                }
+            }, true);
+        })
+        .froalaEditor({
             toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
             pluginsEnabled: null,
             spellcheck: true,
             height: 300
             //toolbarInline: true,
         })
-    var input = $("#froala-editor");
-    input.on('keyup', function (e) {
-        if (e.which <= 90 && e.which >= 48) {
-            var html = $('div#froala-editor').froalaEditor('html.get');
-            var text = extractContent(html)
-            //console.log(text)
-            var n = text.split(" ");
-            word = n[n.length - 1];
+    /*     var input = $("#froala-editor");
+        input.on('keyup', function (e) {
+            if (e.which <= 90 && e.which >= 48) {
+                var html = $('div#froala-editor').froalaEditor('html.get');
+                var text = extractContent(html)
+                //console.log(text)
+                var n = text.split(" ");
+                word = n[n.length - 1];
 
 
-            //awesompleteInject(word)
-            //suggestionClick()
-            //console.log(window.getSelection().baseOffset)
-            //html += '<div id="suggestions" class="list-group list-group-horizontal"></div>';
-            //$('#froala-editor').froalaEditor('html.set', html, false)
-            //$('#froala-editor').froalaEditor('html.insert', '', false)
-            placeDiv(window.getSelection().baseOffset, -250)
-            getSuggestions(word)
-            console.log($('#froala-editor').caret('position'))
-        }
+                //awesompleteInject(word)
+                //suggestionClick()
+                //console.log(window.getSelection().baseOffset)
+                //html += '<div id="suggestions" class="list-group list-group-horizontal"></div>';
+                //$('#froala-editor').froalaEditor('html.set', html, false)
+                //$('#froala-editor').froalaEditor('html.insert', '', false)
+                //console.log(text)
+                //height = (html.match(/<p>/g) || []).length;
+                //height += (html.match(/<br>/g) || []).length;
+                //console.log(height)
+                //placeDiv(window.getSelection().baseOffset, -250 + (height * 20))
+                getSuggestions(word)
+                datasource = suggestions; //["Jacob", "Isabella", "Ethan", "Emma", "Michael", "Olivia"];
 
-    })
+                // Build data to be used in At.JS config.
+                words = $.map(datasource, function (value, i) {
+                    return {
+                        'id': i,
+                        'word': value,
+                    };
+                });
+
+                // Define config for At.JS.
+                config = {
+                    at: '',
+                    data: words,
+                    editableAtwhoQueryAttrs: {"data-fr-verified": true},
+                    displayTpl: '<li>${word}</li>',
+                    limit: 200
+                }
+
+            }
+
+        }) */
 
     /* $("#froala-editor" ).autocomplete({
       source: [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ]
@@ -61,14 +98,14 @@ $(function () {
 
 function getSuggestions(text) {
     var dataList = $('#suggestions')
-
+    //suggestions = []
     $.getJSON('https://api.datamuse.com/sug?s=' + text + '*&max=5', function (json) {
         json = _.sortBy(json, ['word'])
         //console.log(json)
-        suggestions = []
+
         suggestionBox = '<ul id="suggestionList">'
         for (i = 0; i < json.length; i++) {
-            suggestions.push(json[i].word)
+            suggestions[i] = json[i].word
             suggestionBox += '<button class="list-group-item list-group-item-action" onclick="wordhintOnClick(this)">' + json[i].word + '</button>'
             var option = document.createElement('option');
             dataList.append(option);
@@ -87,6 +124,24 @@ function getSuggestions(text) {
         awesomplete.list = suggestions */
 
         //new Awesomplete(document.querySelector("div#froala-editor"),{ list: suggestions });
+                datasource = suggestions; //["Jacob", "Isabella", "Ethan", "Emma", "Michael", "Olivia"];
+
+        // Build data to be used in At.JS config.
+        words = $.map(datasource, function (value, i) {
+            return {
+                'id': i,
+                'word': value,
+            };
+        });
+
+        // Define config for At.JS.
+        config = {
+            at: '',
+            //editableAtwhoQueryAttrs: {"data-fr-verified": true},
+            data: words,
+            displayTpl: '<li>${word}</li>',
+            limit: 200
+        }
     })
 }
 
@@ -137,7 +192,7 @@ function wordhintOnClick(target) {
 /* var quill = new Quill('#quill-editor', {
     theme: 'snow'
 }); */
-function doGetCaretPosition(oField) {
+/* function doGetCaretPosition(oField) {
 
     // Initialize
     var iCaretPos = 0;
@@ -164,12 +219,40 @@ function doGetCaretPosition(oField) {
 
     // Return results
     return iCaretPos;
-}
+} */
 
-function placeDiv(x_pos, y_pos) {
+/* function placeDiv(x_pos, y_pos) {
     var d = document.getElementById('suggestions');
     d.style.position = "absolute";
     d.style.left = x_pos + 'px';
     d.style.top = y_pos + 'px';
     d.style.zIndex = 5;
+} */
+
+function autocompletionTest(e) {
+    
+        var html = $('div#froala-editor').froalaEditor('html.get');
+        var text = extractContent(html)
+        //console.log(text)
+        var n = text.split(" ");
+        word = n[n.length - 1];
+
+
+        //awesompleteInject(word)
+        //suggestionClick()
+        //console.log(window.getSelection().baseOffset)
+        //html += '<div id="suggestions" class="list-group list-group-horizontal"></div>';
+        //$('#froala-editor').froalaEditor('html.set', html, false)
+        //$('#froala-editor').froalaEditor('html.insert', '', false)
+        //console.log(text)
+        //height = (html.match(/<p>/g) || []).length;
+        //height += (html.match(/<br>/g) || []).length;
+        //console.log(height)
+        //placeDiv(window.getSelection().baseOffset, -250 + (height * 20))
+        getSuggestions(word)
+
+
+
+
+    
 }
